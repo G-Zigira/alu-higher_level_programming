@@ -1,3 +1,3 @@
 #!/usr/bin/python3
 numb = 3.14159
-print(f"numb:.2f}")
+print(f"Float: {numb:.2f}")
