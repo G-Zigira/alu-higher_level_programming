@@ -2,6 +2,7 @@
 
 """Class that returns the dictionary of attributes of instances"""
 
+
 class Student:
     """Define class attributes."""
     def __init__(self, first_name, last_name, age):
