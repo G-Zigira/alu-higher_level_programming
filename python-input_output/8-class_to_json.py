@@ -2,6 +2,7 @@
 
 """Return the dictionary discription."""
 
+
 def class_to_json(obj):
     """returns the dictionary discription."""
 
