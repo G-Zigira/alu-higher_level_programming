@@ -1,74 +1,59 @@
 #!/usr/bin/python3
-"""This module contains the Square class."""
-
-from rectangle import Rectangle
+""" just another module"""
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Represents the Square class that inherits from the Rectangle class."""
-
+    """just a module"""
     def __init__(self, size, x=0, y=0, id=None):
-        """
-        Initializes Square instance.
-
-        :param size: The size of the square (width and height).
-        :param x: The x coordinate (default is zero).
-        :param y: The y coordinate (default is zero).
-        :param id: Optional id for the instance.
-        """
+        """just using the super class"""
         super().__init__(size, size, x, y, id)
+
+    def __str__(self):
+        """ just string form """
+        d = self.id
+        b = self.height
+        c = self.x
+        e = self.y
+        return ("[Square] ({}) {}/{} - {}".format(d, c, e, b))
 
     @property
     def size(self):
-        """Getter for size"""
+        """just size function"""
         return self.width
-    
+
     @size.setter
     def size(self, value):
-        """Setter for size."""
+        """setter for size"""
+        if type(value) is not int:
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
         self.width = value
         self.height = value
 
+        # Methods
     def update(self, *args, **kwargs):
+        """Updates the Square attributes
         """
-        Updates the Square attributes based on provided arguments.
+        dct = {}
+        if args is not None and len(args) > 0:
+            keys = ['id', 'size', 'x', 'y']
+            for i in range(len(args) if len(args) <= 4 else 4):
+                dct[keys[i]] = args[i]
+        else:
+            dct = kwargs
 
-        :param args: Variable length argument list (ignored if not empty).
-        :param kwargs: Keyword arguments for attribute updates.
-        """
-        if args:
-            # Unpack args into attributes
-            if len(args) > 0:
-                self.id = args[0]
-            if len(args) > 1:
-                self.size = args[1]  # This uses the size setter
-            if len(args) > 2:
-                self.x = args[2]
-            if len(args) > 3:
-                self.y = args[3]
-            return  # Return after processing args
-
-        for key, value in kwargs.items():
-            if key == 'id':
-                self.id = value
-            elif key == 'size':
-                self.size = value  # This uses the size setter
-            elif key == 'x':
-                self.x = value
-            elif key == 'y':
-                self.y = value
-
-
-    def __str__(self):
-        """Overrides the __str__ method to return a statement."""
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
+        if len(dct) > 0:
+            for key, value in dct.items():
+                if key == 'id' and value is None:
+                    self.__init__(self.size, self.x, self.y)
+                else:
+                    setattr(self, key, value)
 
     def to_dictionary(self):
-        """Returns string representation of the Square class"""
-        return {
-                'id': self.id,
-                'size': self.width,
-                'x': self.x,
-                'y': self.y
-                }
-
+        """
+        just square dictionary
+        represeentation
+        """
+        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
