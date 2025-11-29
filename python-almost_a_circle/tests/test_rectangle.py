@@ -308,6 +308,23 @@ class TestRectangle(unittest.TestCase):
         self.rectangle_t.display()
         expected_output = "\n\n  ##\n  ##\n  ##\n"
         self.assertEqual(stdout.getvalue(), expected_output)
+        
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_display_no_x_no_y(self, stdout):
+        """Test display with default x=0 and y=0"""
+        r = Rectangle(2, 3)
+        r.display()
+        expected = "##\n##\n##\n"
+        self.assertEqual(stdout.getvalue(), expected)
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_display_no_y(self, stdout):
+            """ Test display with x but no y """
+            r = Rectangle(2, 3, 2)  # x=2, y defaults to 0
+            r.display()
+            expected = "  ##\n  ##\n  ##\n"
+            self.assertEqual(stdout.getvalue(), expected)
+
 
     #-----------------------------------------------------
     #Testing magic __str__ function for rectangle instance
