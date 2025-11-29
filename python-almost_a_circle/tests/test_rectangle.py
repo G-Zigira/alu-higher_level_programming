@@ -81,6 +81,17 @@ class TestRectangle(unittest.TestCase):
         '''
         with self.assertRaises(ValueError):
             self.rectangle_t.height = 0
+            
+            
+    def test_width_string(self):
+        """Test passing string to width"""
+        with self.assertRaises(TypeError):
+            Rectangle(1, "2")
+
+    def test_height_zero_constructor(self):
+        """Test passing zero height in constructor"""
+        with self.assertRaises(ValueError):
+            Rectangle(1, 0)
 
     #--------------------------------------------------------------------------
     #The width argument only accepts positive integers, it does not accept zero
