@@ -139,6 +139,12 @@ class TestRectangle(unittest.TestCase):
         '''
         with self.assertRaises(TypeError):
             self.rectangle_t.height = "str"
+            
+    def test_height_as_str_in_constructor(self):
+        '''Test that passing a string as height raises TypeError '''
+        with self.assertRaises(TypeError) as error:
+            Rectangle(1, "2")
+            self.assertEqual(str(error.exception), "height must be an integer")
 
     def test_height_as_float(self):
         '''Height setter raises TypeError if height is not an integer
